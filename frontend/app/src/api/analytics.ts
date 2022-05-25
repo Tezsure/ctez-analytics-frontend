@@ -46,8 +46,8 @@ export const usePriceStats = () => {
       'main_header',
      async () => {
         const data = await analyticsAPI.get('/summary');
-        const ctezMainHeader:ctezMainHeader=data.data;
-        return ctezMainHeader;
+        const ctezmainHeader:ctezMainHeader=data.data;
+        return ctezmainHeader;
       },
       { refetchInterval: 30_000 },
     );
@@ -57,8 +57,8 @@ export const usePriceStats = () => {
       'main_ctezOven',
      async () => {
         const data = await analyticsAPI.get('/ovens');
-        const ctezOven:ctezOven=data.data;
-        return ctezOven;
+        const ctezoven:ctezOven=data.data;
+        return ctezoven;
       },
       { refetchInterval: 30_000 },
     );
@@ -82,15 +82,15 @@ export const usePriceStats = () => {
       { refetchInterval: 30_000 },
     );
   };
-  export const usectezGraphTVL= () => {
+  export const useCtezGraphTVL= () => {
     return useQuery<{data1:number[],dateArr:number[]}, Error>(
       'ctez_graph_TVL',
      async () => {
         const data = await analyticsAPI.get('/main_data/drift');
-        const ctezGraphTVL:ctezGraphTVL=data.data;
+        const ctezgraphTVL:ctezGraphTVL=data.data;
         const data1:number[]=[];
         const dateArr:number[]=[];
-        ctezGraphTVL.tvlData.forEach((element)=>{
+        ctezgraphTVL.tvlData.forEach((element)=>{
             data1.push(element.tvl);
            dateArr.push(new Date(element.timestamp).getDate())
         })
@@ -100,15 +100,15 @@ export const usePriceStats = () => {
     );
   };
 
-  export const usectezGraphOvendata= () => {
+  export const useCtezGraphOvendata= () => {
     return useQuery<{data1:number[],dateArr:number[]}, Error>(
       'ctez_graph_TVL',
      async () => {
         const data = await analyticsAPI.get('/main_data/drift');
-        const ctezGraphOvendata:ctezGraphOvendata=data.data;
+        const ctezgraphOvendata:ctezGraphOvendata=data.data;
         const data1:number[]=[];
         const dateArr:number[]=[];
-        ctezGraphOvendata.ovendata.forEach((element)=>{
+        ctezgraphOvendata.ovendata.forEach((element)=>{
             data1.push(element.ctezStanding);
            dateArr.push(new Date(element.timestamp).getDate())
         })
@@ -117,15 +117,15 @@ export const usePriceStats = () => {
       { refetchInterval: 30_000 },
     );
   };
-  export const usectezGraphVolumestat= () => {
+  export const useCtezGraphVolumestat= () => {
     return useQuery<{data1:number[],dateArr:number[]}, Error>(
       'ctez_graph_TVL',
      async () => {
         const data = await analyticsAPI.get('/main_data/drift');
-        const ctezGraphVolumestat:ctezGraphVolumestat=data.data;
+        const ctezgraphVolumestat:ctezGraphVolumestat=data.data;
         const data1:number[]=[];
         const dateArr:number[]=[];
-        ctezGraphVolumestat.volumestats.forEach((element)=>{
+        ctezgraphVolumestat.volumestats.forEach((element)=>{
             data1.push(element.volume24hours);
            dateArr.push(new Date(element.timestamp).getDate())
         })
