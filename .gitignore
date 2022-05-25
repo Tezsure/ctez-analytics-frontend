@@ -1,0 +1,9 @@
+_build/*
+*~
+\#*\#
+.\#*
+
+# IDE
+.idea/
+.vscode/
+frontend/app/package-lock.json
