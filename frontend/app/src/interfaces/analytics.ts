@@ -45,6 +45,12 @@ export interface Ovendata {
     tezStanding: number;
     timestamp: Date;
 }
+export interface TwoLineGraph {
+    data1:number | string;
+    data2:number | string;
+    value:number | string;
+    time:number | string | Date;
+}
 
 export interface ctezGraphOvendata {
     ovendata: Ovendata[];

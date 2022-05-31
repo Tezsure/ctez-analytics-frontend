@@ -1,6 +1,8 @@
 import { Button, ButtonGroup, Flex, Skeleton, Text, useMediaQuery } from "@chakra-ui/react";
-import React from "react";
-import { usePriceStats } from "../../api/analytics";
+import React, { useState } from "react";
+import { useCtezGraphctez, usePriceStats } from "../../api/analytics";
+import { TextWithCircleColor } from "../../components/analytics/textWithColorCircle";
+import TwoLineChart from "../../components/graph/two-line-chart";
 import GraphTwoLine from "../../components/graph/TwoLineGraph";
 import { useThemeColors } from "../../hooks/utilHooks";
 
@@ -13,7 +15,8 @@ const GraphCtez: React.FC = () => {
         'imported',
         'text4',
     ]);
-  const { data:priceData=false } = usePriceStats();
+  const { data:mainDatatarget=[] } = useCtezGraphctez();
+  const [value, setValue] = useState<number | undefined>(3810);
     // graph options
     
     return (<Flex direction='column'
@@ -35,7 +38,6 @@ const GraphCtez: React.FC = () => {
                 Ctez
             </Text>
             <ButtonGroup variant='ghost' textColor={textcolor} fontSize='12px' spacing='-1'>
-                <Button fontSize='12px' textDecoration='underline'>1W</Button>
                 <Button fontSize='12px' textDecoration='underline' >1M</Button>
                 <Button fontSize='12px' textDecoration='underline'>ALL</Button>
             </ButtonGroup>
@@ -44,17 +46,19 @@ const GraphCtez: React.FC = () => {
         <Flex justifyContent='space-between' fontWeight={400} fontSize='12px' >
             <Flex gridGap={4}>
                 <Text>
-                    Price
+                     Price
                 </Text>
-                <Text>
-                    Target
-                </Text>
+                
+                <TextWithCircleColor color="#ffff" text="price2" />
             </Flex>
-            <Text>Premium  <b>-0.01%</b></Text>
+            {value && <Text>Premium  <b>{value}%</b></Text>}
         </Flex>
         
-        {priceData?<GraphTwoLine labelArr={priceData.dateArr} data1={priceData.ctez_priceArr} data2={priceData.tez_priceArr}/> :<Skeleton height='200px' minWidth='20px' /> }
-        {/* graph goes here */}
+        {/* <GraphTwoLine labelArr={priceData.dateArr} data1={priceData.ctez_priceArr} data2={priceData.tez_priceArr}/>
+        graph goes here */}
+        {mainDatatarget.length?<TwoLineChart
+         data={mainDatatarget}  setValue={setValue} 
+        />:null}
     </Flex>)
 }
 export default GraphCtez;
