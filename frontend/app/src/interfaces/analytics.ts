@@ -27,6 +27,14 @@ export interface ctezGraphctez {
     premium: number;
     timestamp: Date;
 }
+export interface ctezGraphctezDateRange {
+    id: number;
+    current_price: number;
+    current_target: number;
+    premium: number;
+    timestamp_from: Date;
+    timestamp_to: Date;
+}
 
 export interface TvlData {
     timestamp: Date;

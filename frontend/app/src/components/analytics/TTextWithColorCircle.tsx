@@ -1,4 +1,3 @@
-import { StatArrow, StatHelpText } from '@chakra-ui/react';
 import React from 'react';
 
 
@@ -9,10 +8,11 @@ export interface TextColor  {
 
 const TextWithCircleColor: React.FC<TextColor> = (props) => {
   return (
-    <StatHelpText>
-    <StatArrow type='increase' />
-     {props.text}
-  </StatHelpText>)
+     <span className='textContainer'>
+       <span style={{backgroundColor:props.color}} className='circleIcon' />
+       <span>{props.text}</span>
+     </span>
+    )
 };
 
 export { TextWithCircleColor };

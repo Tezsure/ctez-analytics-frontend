@@ -3,7 +3,7 @@ import { ResponsiveContainer, XAxis, Tooltip, AreaChart, Area, YAxis, CartesianG
 import { format, parseISO } from 'date-fns/fp';
 import { Box } from '@chakra-ui/react';
 
-const DEFAULT_HEIGHT = 300;
+const DEFAULT_HEIGHT = 250;
 const formatDay = format('dd');
 
 export type LineChartProps = {
@@ -80,7 +80,6 @@ const TwoLineChart = ({
          <YAxis
          axisLine={false}
          tickLine={false}
-         minTickGap={10}
          />
           <Tooltip
             contentStyle={{ display: 'none' }}

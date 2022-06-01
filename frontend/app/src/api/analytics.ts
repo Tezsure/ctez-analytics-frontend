@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useQuery } from "react-query";
-import { ctezGraphctez, ctezGraphOvendata, ctezGraphTVL, ctezGraphVolumestat, ctezMainHeader, ctezOven, driftGraphInterface, priceSats, TwoLineGraph } from "../interfaces/analytics";
+import { ctezGraphctez, ctezGraphctezDateRange, ctezGraphOvendata, ctezGraphTVL, ctezGraphVolumestat, ctezMainHeader, ctezOven, driftGraphInterface, priceSats, TwoLineGraph } from "../interfaces/analytics";
 
 const analyticsAPI = axios.create({
   baseURL: 'http://3.109.105.200'
@@ -63,7 +63,8 @@ export const useCtezOven = () => {
     { refetchInterval: 30_000 },
   );
 };
-export const useCtezGraphctez = () => {
+
+export const useCtezGraphctez1m = () => {
   return useQuery<TwoLineGraph[], Error>(
     'graph_ctez',
     async () => {
@@ -75,6 +76,25 @@ export const useCtezGraphctez = () => {
            data2: e.current_target, 
            value: e.premium, 
            time: e.timestamp
+        }
+      })
+      return data1;
+    },
+    { refetchInterval: 30_000 },
+  );
+};
+export const useCtezGraphctezall = () => {
+  return useQuery<TwoLineGraph[], Error>(
+    'graph_ctez_all',
+    async () => {
+      const data = await analyticsAPI.get('/main_data/target_all');
+      const priceStatsArr: ctezGraphctezDateRange[] = data.data;
+      const data1: TwoLineGraph[] = priceStatsArr.map((e) => {
+        return <TwoLineGraph> {
+           data1: e.current_price,
+           data2: e.current_target, 
+           value: e.premium, 
+           time: e.timestamp_from
         }
       })
       return data1;
